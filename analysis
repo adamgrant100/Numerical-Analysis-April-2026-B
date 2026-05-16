@@ -1,0 +1,43 @@
+# COVID-19 India Dataset Analysis in R
+
+## Overview
+
+This activity involved basic data manipulation and exploratory statistical analysis using RStudio and the COVID-19 India dataset (January 2020 – March 2020). The task focused on creating new variables, generating frequency tables, categorising case levels, and identifying states with the highest reporting frequency.
+
+---
+
+## Objectives
+
+The following tasks were completed:
+
+- Created a binary variable called `has_deaths`
+- Generated frequency tables using the `table()` function
+- Converted variables into factor variables with descriptive labels
+- Created a categorical variable called `case_level`
+- Analysed reporting frequency by State/Union Territory
+- Identified the top 10 states with the highest number of reports
+
+---
+
+## Skills Demonstrated
+
+- Data frame manipulation in R
+- Conditional logic using `ifelse()`
+- Frequency analysis using `table()`
+- Factor variable creation
+- Data categorisation
+- Sorting and ranking data
+- Exploratory data analysis
+
+---
+
+## Example Code
+
+### Creating a Binary Variable
+
+```r
+Covid19_India_Jan_20_Mar_20_$has_deaths <- ifelse(
+  Covid19_India_Jan_20_Mar_20_$Deaths > 0,
+  1,
+  0
+)
