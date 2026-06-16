@@ -20,6 +20,8 @@ Median diastolic blood pressure was 83 among diabetic participants and 82 among 
 
 Mean systolic blood pressure was compared across occupational groups using a one-way ANOVA. The result was not statistically significant, F(3, 206) = 0.233, p = 0.873. Therefore, there was no evidence that systolic blood pressure differed significantly across occupational groups.
 
+Note: The original `.sav` dataset has not been uploaded to this repository. The analysis was completed locally in RStudio, and the exported output is included as evidence.
+
 ## Files
 
 - `statistics-analysis.R` – R code used for the analysis.
