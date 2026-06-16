@@ -1,29 +1,34 @@
-AGE SUMMARY
-Mean age: 26.51429 
-Median age: 27 
-Mode age: 26 
+library(haven)
 
-DIASTOLIC BLOOD PRESSURE BY DIABETES STATUS
-Yes  No 
-83  82 
+# Load data
+# Replace filename with the actual .sav file name used locally
+data <- read_sav("your_file_name.sav")
 
-Wilcoxon rank-sum test:
-  
-  Wilcoxon rank sum test with continuity correction
+# Convert labelled variables
+data$diabetes_group <- as_factor(data$diabetes)
+data$occupation_group <- as_factor(data$occupation)
 
-data:  dbp by diabetes_group
-W = 3804.5, p-value = 0.7999
-alternative hypothesis: true location shift is not equal to 0
+# Mode function
+get_mode <- function(x) {
+  x <- na.omit(x)
+  ux <- unique(x)
+  ux[tabulate(match(x, ux)) == max(tabulate(match(x, ux)))]
+}
 
+# Age summary
+mean(data$age, na.rm = TRUE)
+median(data$age, na.rm = TRUE)
+get_mode(data$age)
 
-SYSTOLIC BLOOD PRESSURE BY OCCUPATIONAL GROUP
-occupation_group      sbp
-1         GOVT JOB 129.3833
-2      PRIVATE JOB 126.3469
-3         BUSINESS 127.8571
-4           OTHERS 127.0192
+# Median DBP by diabetes status
+tapply(data$dbp, data$diabetes_group, median, na.rm = TRUE)
 
-One-way ANOVA:
-                  Df Sum Sq Mean Sq F value Pr(>F)
-occupation_group   3    285    94.9   0.233  0.873
-Residuals        206  83800   406.8               
+# Wilcoxon rank-sum test
+wilcox.test(dbp ~ diabetes_group, data = data, exact = FALSE)
+
+# Mean SBP by occupation group
+aggregate(sbp ~ occupation_group, data = data, mean, na.rm = TRUE)
+
+# One-way ANOVA
+anova_result <- aov(sbp ~ occupation_group, data = data)
+summary(anova_result)
